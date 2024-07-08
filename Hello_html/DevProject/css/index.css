@@ -1,0 +1,39 @@
+* {
+    font-family: Helvetica !important;
+    font-size: 24px;
+    text-align: center !important;
+    background-color: rgb(164, 169, 157) !important;
+
+  }
+  
+  
+  h1 {
+    color: rgb(186, 29, 197);
+  }
+  span {
+    display: block;
+  }
+
+  h2 {
+    color: rgb(186, 29, 197);
+  }
+
+  h3 {
+    color: rgb(186, 29, 197);
+  }
+  
+  p, 
+  li {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  
+  a {
+    text-decoration: none;
+  }
+
+  .img {
+    width: 200px;
+    height: 200px;
+  }
