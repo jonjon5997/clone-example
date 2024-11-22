@@ -7,15 +7,29 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "hot" }); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
+  const [activeModal, setActiveModal] = useState("");
+
+  const handleAddClick = () => {
+    setActiveModal("add-garment");
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
 
   return (
     <div className="page">
       <div className="page__content">
-        <Header />
+        <Header handleAddClick={handleAddClick} />
         <Main weatherData={weatherData} />{" "}
         {/* pass the variable to the main componenet as a prop*/}
       </div>
-      <ModalWithForm title="New Garment" buttonText="Add Garment">
+      <ModalWithForm
+        title="New Garment"
+        buttonText="Add Garment"
+        activeModal={activeModal}
+        handleCloseClick={closeActiveModal}
+      >
         <label htmlFor="name" className="modal__label">
           Name{" "}
           <input
