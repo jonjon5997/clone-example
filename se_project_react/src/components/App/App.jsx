@@ -4,10 +4,16 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "hot" }); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState("preview");
+  const [selectedCard, setSelectedCard] = useState({});
+  const handleCardClick = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -21,7 +27,10 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header handleAddClick={handleAddClick} />
-        <Main weatherData={weatherData} />{" "}
+        <Main
+          weatherData={weatherData}
+          handleCardClick={handleCardClick}
+        />{" "}
         {/* pass the variable to the main componenet as a prop*/}
       </div>
       <ModalWithForm
@@ -68,6 +77,11 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
+      <ItemModal
+        activeModal={activeModal}
+        card={selectedCard}
+        handleCloseClick={closeActiveModal}
+      />
     </div>
   );
 }
