@@ -10,8 +10,8 @@ import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-    type: "cold",
-    temp: { F: 999, C: 999 },
+    type: "",
+    temp: { F: 999 },
     city: "",
   }); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
   const [activeModal, setActiveModal] = useState("preview");
