@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "hot" }); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
+  const [weatherData, setWeatherData] = useState({
+    type: "cold",
+    temp: { F: 999, C: 999 },
+    city: "",
+  }); //left part of object is variable name and the second part is the function you can use to change the variable -> variableName, setVariableName
   const [activeModal, setActiveModal] = useState("preview");
   const [selectedCard, setSelectedCard] = useState({});
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -23,10 +30,19 @@ function App() {
     setActiveModal("");
   };
 
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} />
+        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Main
           weatherData={weatherData}
           handleCardClick={handleCardClick}
